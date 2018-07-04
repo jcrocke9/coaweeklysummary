@@ -1,0 +1,11 @@
+{
+  "$schema": "https://dev.office.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "coa-weekly-summary-client-side-solution",
+    "id": "9325efec-ff07-4392-bbe5-c403940def33",
+    "version": "1.0.0.0"
+  },
+  "paths": {
+    "zippedPackage": "solution/coa-weekly-summary.sppkg"
+  }
+}

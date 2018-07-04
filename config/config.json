@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "entry": "./lib/webparts/coaWeeklySummary/CoaWeeklySummaryWebPart.js",
+      "manifest": "./src/webparts/coaWeeklySummary/CoaWeeklySummaryWebPart.manifest.json",
+      "outputPath": "./dist/coa-weekly-summary-web-part.bundle.js"
+    }
+  ],
+  "externals": {},
+  "localizedResources": {
+    "CoaWeeklySummaryWebPartStrings": "webparts/coaWeeklySummary/loc/{locale}.js"
+  }
+}
