@@ -3,4 +3,5 @@ export interface ICoaWeeklySummaryProps {
   spHttpClient?: any;
   siteUrl?: string;
   listName?: string;
+  spSiteUrl?: string;
 }

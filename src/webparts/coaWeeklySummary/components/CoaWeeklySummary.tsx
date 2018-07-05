@@ -4,6 +4,7 @@ import { ICoaWeeklySummaryProps } from './ICoaWeeklySummaryProps';
 import { ICoaWeeklySummaryState } from './ICoaWeeklySummaryState';
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import { IListItem } from './IListItem';
+import { HealthIndicators } from './HealthIndicators';
 
 export default class CoaWeeklySummary extends React.Component<ICoaWeeklySummaryProps, ICoaWeeklySummaryState> {
   constructor(props: ICoaWeeklySummaryProps, state: ICoaWeeklySummaryState) {
@@ -29,11 +30,21 @@ export default class CoaWeeklySummary extends React.Component<ICoaWeeklySummaryP
     const weeklySummary: string = this.state.weeklySummary;
     return (
       <div className={styles.coaWeeklySummary}>
-        <div className={styles.container}>
-          <div className={styles.row}>
-          <span className={styles.title}>Weekly Status for Report Period Ending: {reportPeriodEnd}</span>
-          <p className={styles.description} dangerouslySetInnerHTML={{__html: weeklySummary}}></p>
+        <div className="ms-Grid">
+        <div className={styles.row}>
+        <div className={styles.column}>
+        <span className={styles.title}>Weekly Status for Report Period Ending: {reportPeriodEnd}</span>
+        </div>
+        </div>
+        <div className={styles.row}>
+          <div className={styles.column}>
+
+            <p className={styles.description} dangerouslySetInnerHTML={{ __html: weeklySummary }}></p>
           </div>
+          <div className={styles.leftColumn}>
+            <HealthIndicators siteUrl={this.props.siteUrl} spHttpClient={this.props.spHttpClient} spSiteUrl={this.props.spSiteUrl} />
+          </div>
+        </div>
         </div>
       </div>
     );

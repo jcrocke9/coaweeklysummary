@@ -25,7 +25,8 @@ export default class CoaWeeklySummaryWebPart extends BaseClientSideWebPart<ICoaW
         description: this.properties.description,
         spHttpClient: this.context.spHttpClient,
         siteUrl: this.context.pageContext.web.absoluteUrl,
-        listName: this.properties.listName
+        listName: this.properties.listName,
+        spSiteUrl: this.context.pageContext.site.absoluteUrl
       }
     );
 

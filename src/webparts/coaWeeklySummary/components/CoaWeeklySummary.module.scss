@@ -2,24 +2,25 @@
 
 .coaWeeklySummary {
   .container {
-    max-width: 700px;
+    max-width: 1000px;
     margin: 0px auto;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
   }
 
   .row {
     @include ms-Grid-row;
-    @include ms-fontColor-themePrimary;
     background-color: transparent;
     padding: 20px;
   }
 
   .column {
     @include ms-Grid-col;
-    @include ms-lg10;
-    @include ms-xl8;
-    @include ms-xlPush2;
-    @include ms-lgPush1;
+    @include ms-lg8;
+  }
+
+  .leftColumn {
+    @include ms-Grid-col;
+    @include ms-lg4;
   }
 
   .title {
@@ -29,12 +30,12 @@
 
   .subTitle {
     @include ms-font-l;
-    @include ms-fontColor-themePrimary;
+    // @include ms-fontColor-themePrimary;
   }
 
   .description {
     @include ms-font-l;
-    @include ms-fontColor-themePrimary;
+    // @include ms-fontColor-themePrimary;
   }
 
   .button {
@@ -70,5 +71,18 @@
       vertical-align: top;
       display: inline-block;
     }
+  }
+
+  .green {
+    color: green;
+  }
+  .amber {
+    color: #ffbf00;
+  }
+  .red {
+    color: red;
+  }
+  .grey {
+    color: grey;
   }
 }
