@@ -13,6 +13,7 @@ import { ICoaWeeklySummaryProps } from './components/ICoaWeeklySummaryProps';
 
 export interface ICoaWeeklySummaryWebPartProps {
   description: string;
+  listName: string;
 }
 
 export default class CoaWeeklySummaryWebPart extends BaseClientSideWebPart<ICoaWeeklySummaryWebPartProps> {
@@ -21,7 +22,10 @@ export default class CoaWeeklySummaryWebPart extends BaseClientSideWebPart<ICoaW
     const element: React.ReactElement<ICoaWeeklySummaryProps > = React.createElement(
       CoaWeeklySummary,
       {
-        description: this.properties.description
+        description: this.properties.description,
+        spHttpClient: this.context.spHttpClient,
+        siteUrl: this.context.pageContext.web.absoluteUrl,
+        listName: this.properties.listName
       }
     );
 
@@ -48,7 +52,7 @@ export default class CoaWeeklySummaryWebPart extends BaseClientSideWebPart<ICoaW
                 }),
                 PropertyPaneTextField('listName', {
                   label: strings.ListNameFieldLabel,
-                  value: "Weekly Summary"
+                  value: "Weekly Status"
                 })
               ]
             }

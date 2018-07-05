@@ -1,5 +1,7 @@
 import { IListItem } from './IListItem';
 
 export interface ICoaWeeklySummaryState {
-  items: IListItem[];
+  reportPeriodEnd?: string;
+  Report_x0020_Period_x0020_End?: string;
+  weeklySummary?: string;
 }

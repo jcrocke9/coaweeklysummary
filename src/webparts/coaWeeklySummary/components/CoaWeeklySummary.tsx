@@ -2,32 +2,37 @@ import * as React from 'react';
 import styles from './CoaWeeklySummary.module.scss';
 import { ICoaWeeklySummaryProps } from './ICoaWeeklySummaryProps';
 import { ICoaWeeklySummaryState } from './ICoaWeeklySummaryState';
-import { escape } from '@microsoft/sp-lodash-subset';
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import { IListItem } from './IListItem';
 
 export default class CoaWeeklySummary extends React.Component<ICoaWeeklySummaryProps, ICoaWeeklySummaryState> {
   constructor(props: ICoaWeeklySummaryProps, state: ICoaWeeklySummaryState) {
     super(props);
-
+    this.onChange_reportPeriodEnd = this.onChange_reportPeriodEnd.bind(this);
     this.state = {
-      items: []
+      reportPeriodEnd: '',
+      Report_x0020_Period_x0020_End: '',
+      weeklySummary: ''
     };
   }
-  public render(): React.ReactElement<ICoaWeeklySummaryProps> {
-    const items: JSX.Element[] = this.state.items.map((item: IListItem, i: number): JSX.Element => {
-      return (
-        <div className={ styles.column }>
-        <span className={ styles.title }>Weekly Status for Report Period Ending: {escape(item.reportPeriodEnd)}</span>
-        <p className={ styles.description }>{escape(item.weeklySummary)}</p>
-      </div>
-      );
+
+  public componentDidMount(): void {
+    this.readItem();
+  }
+  public onChange_reportPeriodEnd(Report_x0020_Period_x0020_End: string): void {
+    this.setState({
+      reportPeriodEnd: this.dateToDate(Report_x0020_Period_x0020_End)
     });
+  }
+  public render(): React.ReactElement<ICoaWeeklySummaryProps> {
+    const reportPeriodEnd: string = this.state.reportPeriodEnd;
+    const weeklySummary: string = this.state.weeklySummary;
     return (
-      <div className={ styles.coaWeeklySummary }>
-        <div className={ styles.container }>
-          <div className={ styles.row }>
-            {items}
+      <div className={styles.coaWeeklySummary}>
+        <div className={styles.container}>
+          <div className={styles.row}>
+          <span className={styles.title}>Weekly Status for Report Period Ending: {reportPeriodEnd}</span>
+          <p className={styles.description} dangerouslySetInnerHTML={{__html: weeklySummary}}></p>
           </div>
         </div>
       </div>
@@ -35,19 +40,12 @@ export default class CoaWeeklySummary extends React.Component<ICoaWeeklySummaryP
   }
 
   private readItem(): void {
-    this.setState({
-      items: []
-    });
     this.getLatestItemId()
       .then((itemId: number): Promise<SPHttpClientResponse> => {
         if (itemId === -1) {
           throw new Error('No items found in the list');
         }
-
-        this.setState({
-          items: []
-        });
-        return this.props.spHttpClient.get(`${this.props.siteUrl}/_api/web/lists/getbytitle('${this.props.listName}')/items(${itemId})?$select=Title,Id`,
+        return this.props.spHttpClient.get(`${this.props.siteUrl}/_api/web/lists/getbytitle('Weekly Status')/items(${itemId})?$select=Title,Id,Report_x0020_Period_x0020_End,Weekly_x0020_Summary`,
           SPHttpClient.configurations.v1,
           {
             headers: {
@@ -61,17 +59,19 @@ export default class CoaWeeklySummary extends React.Component<ICoaWeeklySummaryP
       })
       .then((item: IListItem): void => {
         this.setState({
-          items: []
+          Report_x0020_Period_x0020_End: item.Report_x0020_Period_x0020_End,
+          weeklySummary: item.Weekly_x0020_Summary
         });
+        this.onChange_reportPeriodEnd(item.Report_x0020_Period_x0020_End);
       }, (error: any): void => {
         this.setState({
-          items: []
+          weeklySummary: '<p>No weekly status found</p>'
         });
       });
   }
   private getLatestItemId(): Promise<number> {
     return new Promise<number>((resolve: (itemId: number) => void, reject: (error: any) => void): void => {
-      this.props.spHttpClient.get(`${this.props.siteUrl}/_api/web/lists/getbytitle('${this.props.listName}')/items?$orderby=Id desc&$top=1&$select=id`,
+      this.props.spHttpClient.get(`${this.props.siteUrl}/_api/web/lists/getbytitle('Weekly Status')/items?$orderby=Id desc&$top=1&$select=id`,
         SPHttpClient.configurations.v1,
         {
           headers: {
@@ -93,5 +93,10 @@ export default class CoaWeeklySummary extends React.Component<ICoaWeeklySummaryP
           }
         });
     });
+  }
+  public dateToDate(strDate: string): string {
+    let dateValue: Date = new Date(strDate);
+    let dateValueFormatted: string = dateValue.toDateString();
+    return dateValueFormatted;
   }
 }

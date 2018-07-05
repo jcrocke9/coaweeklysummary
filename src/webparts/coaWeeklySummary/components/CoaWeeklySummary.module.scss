@@ -9,7 +9,7 @@
 
   .row {
     @include ms-Grid-row;
-    @include ms-fontColor-white;
+    @include ms-fontColor-themePrimary;
     background-color: transparent;
     padding: 20px;
   }
@@ -24,17 +24,17 @@
 
   .title {
     @include ms-font-xl;
-    @include ms-fontColor-white;
+    @include ms-fontColor-themePrimary;
   }
 
   .subTitle {
     @include ms-font-l;
-    @include ms-fontColor-white;
+    @include ms-fontColor-themePrimary;
   }
 
   .description {
     @include ms-font-l;
-    @include ms-fontColor-white;
+    @include ms-fontColor-themePrimary;
   }
 
   .button {
