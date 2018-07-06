@@ -105,7 +105,7 @@ export default class CoaWeeklySummary extends React.Component<ICoaWeeklySummaryP
           catch (error) {
             this.setState({
               weeklySummary: `<p>No list found named: ${this.props.listName}</p>`
-            })
+            });
           }
         });
     });
@@ -117,7 +117,7 @@ export default class CoaWeeklySummary extends React.Component<ICoaWeeklySummaryP
       return dateValueFormatted;
     }
     else {
-      return 'No status found'
+      return 'No status found';
     }
   }
 }
