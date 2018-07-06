@@ -1,0 +1,10 @@
+{
+    "rules": {
+        "quotemark": [
+            true,
+            "single",
+            "jsx-single"
+        ],
+        "max-line-length": false
+    }
+}

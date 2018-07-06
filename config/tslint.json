@@ -39,9 +39,7 @@
       "use-named-parameter": true,
       "valid-typeof": true,
       "variable-name": false,
-      "whitespace": false,
-      "quotemark": [false, "single", "jsx-single"],
-      "max-line-length": false
+      "whitespace": false
     }
   }
 }

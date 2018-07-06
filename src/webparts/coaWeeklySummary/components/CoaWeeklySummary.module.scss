@@ -73,6 +73,17 @@
     }
   }
 
+  .rightJust {
+    @include ms-font-l;
+    text-align: right;
+    margin: 17px 0px;
+  }
+  .healthIndicators {
+    padding-bottom: 5%
+  }
+  .healthIndicators i {
+    padding-left: 5%
+  }
   .green {
     color: green;
   }

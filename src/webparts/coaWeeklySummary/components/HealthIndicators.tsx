@@ -73,11 +73,11 @@ export class HealthIndicators extends React.Component<IHealthIndicatorsProps, IH
         const technicalHealthState: string = this.state.technicalHealth;
         let technicalHealth: string = this.determineHealthIndicator(technicalHealthState);
         return (
-            <div>
-                <div>Overall Project Health:<i className={overallProjectHealth}></i></div>
-                <div>Scope Health: <i className={scopeHealth}></i></div>
-                <div>Resource Health: <i className={resouceHealth}></i></div>
-                <div>Technical Health: <i className={technicalHealth}></i></div>
+            <div className={styles.rightJust}>
+                <div className={styles.healthIndicators}>Overall Project Health <i className={overallProjectHealth}></i></div>
+                <div className={styles.healthIndicators}>Scope Health <i className={scopeHealth}></i></div>
+                <div className={styles.healthIndicators}>Resource Health <i className={resouceHealth}></i></div>
+                <div className={styles.healthIndicators}>Technical Health <i className={technicalHealth}></i></div>
             </div>
         );
     }
