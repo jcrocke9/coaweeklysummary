@@ -52,8 +52,7 @@ export default class CoaWeeklySummaryWebPart extends BaseClientSideWebPart<ICoaW
                   label: strings.DescriptionFieldLabel
                 }),
                 PropertyPaneTextField('listName', {
-                  label: strings.ListNameFieldLabel,
-                  value: "Weekly Status"
+                  label: strings.ListNameFieldLabel
                 })
               ]
             }
